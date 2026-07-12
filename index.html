@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#F7F4ED" />
+    <title>Dhara's Beaker Puzzle</title>
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <div id="orientation-prompt">
+      <div class="prompt-content">
+        <div class="phone-icon"></div>
+        <p>Rotate your device to landscape to play</p>
+      </div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+    
+    <!-- Fallback accessibility overlay for high contrast or screen reader users (visual elements rendered to canvas) -->
+    <div id="accessibility-overlay" class="sr-only" aria-live="polite">
+      <h1>Dhara's Beaker Puzzle</h1>
+      <p>Measure exactly 5 liters of water using three beakers. Beaker A has 10L capacity and starts full. Beaker B has 4L capacity and starts empty. Beaker C has 3L capacity and starts empty.</p>
+    </div>
+    
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
+

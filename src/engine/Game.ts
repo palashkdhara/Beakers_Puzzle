@@ -460,9 +460,21 @@ export class GameOrchestrator {
     // Resize bucket dimensions based on screen scale and beaker count
     const capMax = Math.max(...this.buckets.map(b => b.capacity));
     const scaleMultiplier = N === 3 ? 1.0 : (N === 4 ? 0.82 : 0.70);
-    const screenScale = Math.max(0.48, Math.min(1.2, w / 700)) * scaleMultiplier;
+    
+    // Initial responsive scale based on width
+    let screenScale = Math.max(0.48, Math.min(1.2, w / 700)) * scaleMultiplier;
 
-    // size all buckets proportional to capacity
+    // Constraint 1: Vertical clearance from Top Header card
+    const headerBottom = 20 + 75; // padding + headerH
+    const minClearanceY = 15;
+    const maxBeakerBaseH = 115 + 70; // 185px (tallest beaker base)
+    
+    if (tableY - (maxBeakerBaseH * screenScale) < headerBottom + minClearanceY) {
+      const allowedHeight = tableY - headerBottom - minClearanceY;
+      screenScale = allowedHeight / maxBeakerBaseH;
+    }
+
+    // Apply scale to widths/heights so we can check horizontal constraints
     this.buckets.forEach(b => {
       const relativeScale = b.capacity / capMax;
       const baseW = 90 + relativeScale * 35;
@@ -471,7 +483,7 @@ export class GameOrchestrator {
       b.height = baseH * screenScale;
     });
 
-    const gap = (N === 3 ? 60 : (N === 4 ? 40 : 25)) * screenScale;
+    let gap = (N === 3 ? 60 : (N === 4 ? 40 : 25)) * screenScale;
     const centerX = w / 2;
 
     // Calculate total width of all beakers + gaps
@@ -481,7 +493,31 @@ export class GameOrchestrator {
       if (idx > 0) totalWidth += gap;
     });
 
-    // Compute starting x
+    // Constraint 2: Horizontal clearance from screen bounds
+    const minClearanceX = 40; // 20px padding on each side
+    if (totalWidth > w - minClearanceX) {
+      const reduction = (w - minClearanceX) / totalWidth;
+      screenScale *= reduction;
+      
+      // Re-apply scale
+      this.buckets.forEach(b => {
+        const relativeScale = b.capacity / capMax;
+        const baseW = 90 + relativeScale * 35;
+        const baseH = 115 + relativeScale * 70;
+        b.width = baseW * screenScale;
+        b.height = baseH * screenScale;
+      });
+      
+      gap *= reduction;
+      
+      // Re-calculate total width
+      totalWidth = 0;
+      this.buckets.forEach((b, idx) => {
+        totalWidth += b.width;
+        if (idx > 0) totalWidth += gap;
+      });
+    }
+
     let currentX = centerX - totalWidth / 2;
 
     this.originalSlots = [];

@@ -1,6 +1,6 @@
 {
-  "name": "Dhara's Beaker Puzzle",
-  "short_name": "Beaker Puzzle",
+  "name": "Dhara's Beaker Challenge",
+  "short_name": "Beaker Challenge",
   "description": "A relaxing, tactile, minimalist physics-based water measurement puzzle game.",
   "start_url": "/",
   "display": "standalone",

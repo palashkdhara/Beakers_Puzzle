@@ -6,7 +6,7 @@ const DEFAULT_SETTINGS: GameSettings = {
   highContrast: false,
 };
 
-const STORAGE_KEY = 'dharas_beaker_puzzle_state';
+const STORAGE_KEY = 'dharas_beaker_challenge_state';
 
 export class StateManager {
   private state: GameState;

@@ -399,12 +399,14 @@ export class CanvasRenderer {
     }
 
     // Volumetric display capacity label (e.g., "10L")
-    this.ctx.font = '700 17px Outfit';
+    const fontSize = Math.max(12, Math.min(18, Math.round(16 * (b.width / 110))));
+    this.ctx.font = `700 ${fontSize}px Outfit`;
     this.ctx.textAlign = 'center';
     this.ctx.fillStyle = highContrast ? '#111111' : '#2C2720';
     
-    // Draw capacity title above beaker
-    this.ctx.fillText(`${b.capacity}L`, 0, -halfH - 15);
+    // Draw capacity title above beaker with responsive vertical gap
+    const textOffset = Math.max(10, Math.round(15 * (b.width / 110)));
+    this.ctx.fillText(`${b.capacity}L`, 0, -halfH - textOffset);
   }
 
   private drawWaterParticles(particles: WaterParticle[]) {
@@ -633,7 +635,7 @@ export class CanvasRenderer {
     this.ctx.font = '500 15px Outfit';
     
     const subtitleText = isGameFinished 
-      ? "You finished all 5 Beaker Puzzles!"
+      ? "You finished all 5 Beaker Challenges!"
       : `You measured exactly ${state.goal} liters.`;
     this.ctx.fillText(subtitleText, w / 2, cardY + 80);
 

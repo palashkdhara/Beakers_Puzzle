@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80C0FF" />
+      <stop offset="100%" stop-color="#4FA9FF" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="#F7F4ED" />
+  <circle cx="256" cy="256" r="180" fill="url(#grad)" />
+  <!-- Wave SVG drawing inside circle -->
+  <path d="M150 256 c20 -20, 40 -20, 60 0 c20 20, 40 20, 60 0 c20 -20, 40 -20, 60 0 c20 20, 40 20, 60 0" fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round"/>
+  <path d="M170 300 c15 -15, 30 -15, 45 0 c15 15, 30 15, 45 0 c15 -15, 30 -15, 45 0 c15 15, 30 15, 45 0" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="16" stroke-linecap="round"/>
+</svg>
